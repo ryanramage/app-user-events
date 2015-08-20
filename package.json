@@ -1,0 +1,27 @@
+{
+  "name": "gus-user-events",
+  "version": "1.0.0",
+  "description": "A way to store, watch, and process, all user events, all the time",
+  "main": "./lib/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "standard": "^4.5.4",
+    "tap": "^0.4.12",
+    "tape": "^2.14.0"
+  },
+  "scripts": {
+    "test": "standard && ./node_modules/.bin/tap test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://gitlab.rmcloud.com/npm-modules/gus-user-events.git"
+  },
+  "bugs": {
+    "url": "http://gitlab.rmcloud.com/npm-modules/gus-user-events/issues"
+  },
+  "homepage": "http://gitlab.rmcloud.com/npm-modules/gus-user-events",
+  "publishConfig": {
+    "registry": "http://npm.rmcloud.com:8123"
+  },
+  "docker-registry": "docker.rmcloud.com"
+}
