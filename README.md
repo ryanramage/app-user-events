@@ -1,4 +1,4 @@
-# gus-user-events
+# app-user-events
 
 A way to store, retrive, and trigger app user events.
 
@@ -6,13 +6,13 @@ Be careful with user events. This form the base for triggering a workflow.
 
 
 ```
-npm install gus-user-events
+npm install app-user-events
 ```
 
 ## Usage
 
 ``` js
-var events = require('gus-user-events')(dburl)
+var events = require('app-user-events')(dburl)
 
 var data = {name: 'Ryan', awesome: true}
 
