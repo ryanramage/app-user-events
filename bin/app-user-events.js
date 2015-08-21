@@ -24,12 +24,12 @@ if (action === 'post') {
   return
 }
 
-if (action === 'space') {
+if (action === 'query') {
   var space_name = opts._.splice(0,1)[0]
-  var space = app.space(space_name)
+  var query = app.query(space_name)
 
   if (opts.q) {
-    space = space[opts.q].apply(null, opts._)
+    query = query[opts.q].apply(null, opts._)
   }
 
 
@@ -42,9 +42,9 @@ if (action === 'space') {
       var kv = couch_opt.split('=')
       if (kv.length === 2) query_opts[kv[0]] = kv[1]
     })
-    space = space.addQueryOpts(query_opts)
+    query = query.addQueryOpts(query_opts)
   }
 
-  space.stream().pipe(process.stdout)
+  query.stream().pipe(process.stdout)
 
 }
