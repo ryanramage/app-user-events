@@ -11,49 +11,55 @@ npm install app-user-events
 
 ## Usage
 
-``` js
-var events = require('app-user-events')(dburl)
 
-var data = {name: 'Ryan', awesome: true}
+    var events = require('app-user-events')(dburl)
 
-events.post('space', 'type', 'userid', data)
-events.post('space', 'type', 'userid', ['tag1'], data)
+Posting events
 
+    var data = {name: 'Ryan', awesome: true}
+    events.post('space', 'event', 'userid', data)
+    events.post('space', 'event', 'userid', ['tag1'], data)
 
-events.by('space').stream()
-events.by('space', 'type').stream()
-events.by('space', 'type', 'userid').stream()
-events.by('space', 'type', 'userid')
-  .addQueryOpts({limit:1}) // add traditional couchdb query params
-  .stream()
+Query events
 
-events.by('space', 'type')
-  .tagsOR(['a', 'b']) // events have tags a OR b
-  .stream()
-events.by('space', 'type')
-  .tagsAND(['a', 'b']) //events have tags a AND b
-  .stream()
+    events.space('space').stream()
+    events.space('space').by_user('38329823').stream()
+    events.space('space').by_event('login').stream()
+    events.space('space').by_user_event('38329823', 'login').stream()
+    events.space('space').by_user_event_tag('38329823', 'request-showing', 'E138329').stream()
 
-var conditions = {
-  tagsOR: ['tag1', 'tag2'], // only trigger OR of these tags
-  validator: 'validatejs',
-  valid: { // some declaritve object validator
-    awesome: {equality: true}
-  }
-}
+Add some couch options
 
-var hook = require('webhook-event')('http://salesforce.com/newPerson', {
-  headers: { accessToken: 'dasdsadsasdaas' }
-})
+    events.space('space')
+      .addQueryOpts({limit:1}) // add traditional couchdb query params
+      .stream()
 
-events.createTrigger('space', 'type', conditions, hook, function(err, success){
-  success._id
-  events.removeTrigger(success._id, function(err){
+    events.space('space')
+      .by_user_event('38329823', 'login')
+      .addQueryOpts({limit:3})
+      .stream()
+
+Settup Triggers
+
+    var conditions = {
+      tagsOR: ['tag1', 'tag2'], // only trigger OR of these tags
+      validator: 'validatejs',
+      valid: { // some declaritve object validator
+        awesome: {equality: true}
+      }
+    }
     
-  })
-})
+    var hook = require('webhook-event')('http://salesforce.com/newPerson', {
+      headers: { accessToken: 'dasdsadsasdaas' }
+    })
+    
+    events.createTrigger('space', 'type', conditions, hook, function(err, success){
+      success._id
+      events.removeTrigger(success._id, function(err){
+        
+      })
+    })
 
-```
 
 ## License
 
