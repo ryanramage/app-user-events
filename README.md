@@ -148,6 +148,9 @@ Create a trigger
 
     > app-user-events createTrigger timeline users logins --conditions.event login --on_trigger.module app-user-events-hook-webhook
 
+Create a trigger
+
+    > app-user-events createTrigger timeline users evening-logins --conditions.event login --conditions.tagsOR evening --on_trigger.module app-user-events-hook-webhook
 
 
 ## License
