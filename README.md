@@ -5,14 +5,17 @@ A way to store, retrive, and trigger app user events.
 Be careful with user events. This form the base for triggering a workflow.
 
 
-```
-npm install app-user-events
-```
-
-## Usage
 
 
-    var events = require('app-user-events')(dburl)
+## Module Usage
+
+Install
+
+    npm install app-user-events
+
+Require and config
+
+    var events = require('app-user-events')('http://localhost:5984/app-user-events')
 
 Posting events
 
@@ -59,6 +62,52 @@ Settup Triggers
         
       })
     })
+
+
+## Command Line Usage
+
+Install
+
+    npm install app-user-events
+
+Config. We use the [rc configuration](https://github.com/dominictarr/rc#standards). The only
+required option is `dburl` which by default is `http://localhost:5984/app-user-events` 
+
+Post examples
+
+post to space=timeline, event=star, user_id=1, tags=[E21221,E42]
+
+    > app-user-events post timeline star 1 E21221,E42
+
+post to space=timeline, event=star, user_id=1, with data from a json file
+
+    > app-user-events post timeline star 1 -f ~/data/something.json
+
+Query examples
+
+All events in the timeline space
+
+    > app-user-events query timeline 
+
+Add couch options, like limit
+
+    > app-user-events query timeline  -c limit=1
+
+Query by_user=1
+
+    > app-user-events query timeline -q by_user 1
+
+Query by_user = 1 with event = start
+
+    > app-user-events query timeline -q by_user_event 1 star
+
+Query by_user = 1 with event = start, tagged E21221
+
+    > app-user-events query timeline -q by_user_event_tag 1 star E21221
+
+Query by_event=star, all users
+
+    > app-user-events query timeline -q by_event star
 
 
 ## License
