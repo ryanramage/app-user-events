@@ -144,6 +144,12 @@ Create a trigger
 
     > app-user-events createTrigger timeline property show-me-stars --conditions.tagsOR star --on_trigger.module app-user-events-hook-webhook
 
+Create a trigger
+
+    > app-user-events createTrigger timeline users logins --conditions.event login --on_trigger.module app-user-events-hook-webhook
+
+
+
 ## License
 
 MIT
