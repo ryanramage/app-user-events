@@ -75,13 +75,13 @@ required option is `dburl` which by default is `http://localhost:5984/app-user-e
 
 Post examples
 
-post to space=timeline, event=star, user_id=1, tags=[E21221,E42]
+post to space=timeline, event=E21221, user_id=1, tags=[star]
 
-    > app-user-events post timeline star 1 E21221,E42
+    > app-user-events post timeline 1 E21221 star
 
-post to space=timeline, event=star, user_id=1, with data from a json file
+post to space=timeline, event=E21221, user_id=1, with data from a json file
 
-    > app-user-events post timeline star 1 -f ~/data/something.json
+    > app-user-events post timeline 1 E21221 -f ~/data/something.json
 
 Query examples
 
@@ -97,17 +97,17 @@ Query by_user=1
 
     > app-user-events query timeline -q by_user 1
 
-Query by_user = 1 with event = start
+Query by_user = 1 with event = E21221
 
-    > app-user-events query timeline -q by_user_event 1 star
+    > app-user-events query timeline -q by_user_event 1 E21221
 
-Query by_user = 1 with event = start, tagged E21221
+Query by_user = 1 with event = E21221, tagged star
 
-    > app-user-events query timeline -q by_user_event_tag 1 star E21221
+    > app-user-events query timeline -q by_user_event_tag 1 E21221 star
 
-Query by_event=star, all users
+Query by_event=E21221, all users
 
-    > app-user-events query timeline -q by_event star
+    > app-user-events query timeline -q by_event E21221
 
 
 ## License
