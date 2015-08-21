@@ -20,16 +20,16 @@ Require and config
 Posting events
 
     var data = {name: 'Ryan', awesome: true}
-    events.post('space', 'event', 'userid', data)
-    events.post('space', 'event', 'userid', ['tag1'], data)
+    events.post('space', 'userid', 'E38293', data)
+    events.post('space', 'userid', 'E38293', ['showing-request'], data)
 
 Query events
 
     events.query('space').stream()
-    events.query('space').by_user('38329823').stream()
-    events.query('space').by_event('login').stream()
-    events.query('space').by_user_event('38329823', 'login').stream()
-    events.query('space').by_user_event_tag('38329823', 'request-showing', 'E138329').stream()
+    events.query('space').by_user('userid').stream()
+    events.query('space').by_event('E38293').stream()
+    events.query('space').by_user_event('userid', 'E38293').stream()
+    events.query('space').by_user_event_tag('userid', 'E138329', 'request-showing').stream()
 
 Add some couch options
 
