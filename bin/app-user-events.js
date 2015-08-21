@@ -48,3 +48,17 @@ if (action === 'query') {
   query.stream().pipe(process.stdout)
 
 }
+
+if (action === 'createTrigger') {
+
+  if (opts._.length !== 3) return console.log('space, category, name specificly please')
+  if (!opts.conditions) return console.log('need conditions')
+  if (!opts.on_trigger) return console.log('need on_trigger')
+
+  if (opts.conditions.tagsOR) opts.conditions.tagsOR = opts.conditions.tagsOR.split(',')
+  if (opts.conditions.tagsAND) opts.conditions.tagsAND = opts.conditions.tagsAND.split(',')
+
+  app.createTrigger(opts._[0], opts._[1], opts._[2], opts.conditions, opts.on_trigger)
+
+}
+

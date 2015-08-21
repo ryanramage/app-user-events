@@ -44,19 +44,50 @@ Add some couch options
 
 Settup Triggers
 
+    // trigger on a login
     var conditions = {
+      event: 'login'
+    }
+
+    // trigger on tags in an OR condition
+    conditions = {
+      tagsOR: ['star', 'like']
+    }
+
+    // trigger on tags in an AND condition
+    conditions = {
+      tagsAND: ['login', 'evening']
+    }
+
+    // trigger running through a module that is hotloaded
+    conditions = {
+      module: 'app-user-events-conditions-validatejs',
+      constraints: { // module is a declaritve object validator that uses this json
+        awesome: {equality: true}
+      }      
+    }
+
+    // trigger with one of these tags AND the module validation
+    conditions = {
       tagsOR: ['tag1', 'tag2'], // only trigger OR of these tags
-      validator: 'validatejs',
-      valid: { // some declaritve object validator
+      module: 'app-user-events-conditions-validatejs',
+      constraints: { // module is a declaritve object validator that uses this json
         awesome: {equality: true}
       }
     }
     
-    var hook = require('webhook-event')('http://salesforce.com/newPerson', {
-      headers: { accessToken: 'dasdsadsasdaas' }
-    })
+    // specify the module to use when the trigger fires
+    var on_trigger = {
+      module: 'app-user-events-hook-webhook',
+      config: {
+        url: 'http://salesforce.com/newPerson',
+        headers: { 
+          accessToken: 'dasdsadsasdaas' 
+        }
+      }
+    }
     
-    events.createTrigger('space', 'type', conditions, hook, function(err, success){
+    events.createTrigger('space', 'category', 'triggerName', conditions, on_trigger, function(err, success){
       success._id
       events.removeTrigger(success._id, function(err){
         
@@ -109,6 +140,9 @@ Query by_event=E21221, all users
 
     > app-user-events query timeline -q by_event E21221
 
+Create a trigger
+
+    > app-user-events createTrigger timeline property show-me-stars --conditions.tagsOR star --on_trigger.module app-user-events-hook-webhook
 
 ## License
 

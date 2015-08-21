@@ -96,5 +96,13 @@ ddoc.views.by_space = {
   reduce: '_count'
 }
 
+ddoc.views.triggers = {
+  map: function(doc) {
+    if (doc.type !== 'app-user-event-trigger') return;
+
+    emit([doc.space, doc.category, doc.name], null)
+  }
+}
+
 module.exports = ddoc
 
