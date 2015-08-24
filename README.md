@@ -102,7 +102,7 @@ Install
     npm install app-user-events
 
 Config. We use the [rc configuration](https://github.com/dominictarr/rc#standards). The only
-required option is `dburl` which by default is `http://localhost:5984/app-user-events` 
+required option is `database` which by default is `http://localhost:5984/app-user-events` 
 
 Post examples
 

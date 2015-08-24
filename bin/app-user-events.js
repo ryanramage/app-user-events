@@ -2,10 +2,10 @@
 var fs = require('fs')
 
 var opts = require('rc')('app-user-events',{
-  dburl: 'http://localhost:5984/app-user-events'
+  database: 'http://localhost:5984/app-user-events'
 })
 
-var app = require('../lib/index.js')(opts.dburl)
+var app = require('../lib/index.js')(opts.database)
 var action = opts._.splice(0,1)[0]
 
 if (action === 'post') {
