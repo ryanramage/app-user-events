@@ -1,6 +1,6 @@
 {
   "name": "app-user-events",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A way to store, retrive, and trigger app user events",
   "bin": "./bin/app-user-events.js",
   "main": "./lib/index.js",
