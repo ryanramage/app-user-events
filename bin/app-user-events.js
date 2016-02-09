@@ -8,6 +8,22 @@ var opts = require('rc')('app-user-events',{
 var app = require('../lib/index.js')(opts.database)
 var action = opts._.splice(0,1)[0]
 
+if (action === 'put') {
+  if (opts._[4]) {
+    // tags are comma seperated
+    opts._[4] = opts._[4].split(',')
+  }
+
+  if (opts.f) {
+    var data = JSON.parse(fs.readFileSync(opts.f))
+    opts._.push(data) // we should fill sparse opts
+  }
+
+  app[action].apply(null, opts._)
+  return
+}
+
+
 if (action === 'post') {
 
   if (opts._[3]) {
